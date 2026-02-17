@@ -1,0 +1,11 @@
+{
+  "name": "nigerian-fraud-stream",
+  "config": {
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSourceConnector",
+    "tasks.max": "1",
+    "file": "/data/nigerian_fraud_data_100k.csv",
+    "topic": "raw_transactions",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter"
+  }
+}
