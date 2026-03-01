@@ -65,11 +65,11 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,org.pos
 
 # Data Schema
 Column	Type	Description
-step	Int	Unit of time (1 step = 1 hour)
-bank_code	String	Nigerian Bank (e.g., OPay, Moniepoint)
-is_night_tx	Boolean	Binary flag for 12am-5am transactions
-fraud_prob	Double	ML Model confidence score (0.0 - 1.0)
-action	String	Business logic result (BLOCK/FLAG/ALLOW)
+.step	Int	  Unit of time (1 step = 1 hour)   
+.bank_code	String	 Nigerian Bank (e.g., OPay, Moniepoint)
+.is_night_tx	 Boolean	Binary flag for 12am-5am transactions
+.fraud_prob	Double	 ML Model confidence score (0.0 - 1.0)
+.action	String	 Business logic result (BLOCK/FLAG/ALLOW)
 
 
 # Lessons Learned & Engineering Challenges
