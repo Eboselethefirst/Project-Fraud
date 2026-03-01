@@ -25,31 +25,42 @@ Containerized Orchestration: The entire environment (Kafka, Zookeeper, Spark, Po
 # Setup & Installation
 
 1. Clone and Configure
+
 Bash
 
 git clone https://github.com/Eboselethefirst/Project-Fraud.git
+
 cd Project-Fraud
 
 2. Set Environment Variables
 Create a .env file in the root:
 
 Plaintext
+
 POSTGRES_USER=admin
+
 POSTGRES_PASSWORD=your_password
+
 POSTGRES_DB=fraud_db
+
 POSTGRES_URL=jdbc:postgresql://postgres_fraud:5432/fraud_db
 
 3. Launch Infrastructure
 
 Bash
+
 docker-compose up -d
 
 4. Start the Engine
+
 Bash
-# In one terminal, start the producer
+
+In one terminal, start the producer
+
 python kafka-producer.py
 
 In another terminal, submit the Spark job
+
 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,org.postgresql:postgresql:42.6.0 fresh_fraud.py
 
 # Data Schema
@@ -70,9 +81,11 @@ Checkpointing: Mastered the use of Spark Checkpoint metadata to ensure fault-tol
 # Fraud Impact Report (SQL Insights)
 To demonstrate the value of this pipeline, run the following query in pgAdmin/Postgres to see the total potential loss prevented:
 
-# SQL
+SQL
 
 -- Calculate Total Naira Saved from Blocked Transactions
+
+
 SELECT 
     action, 
     COUNT(*) as total_count, 
