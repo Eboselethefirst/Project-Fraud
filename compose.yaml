@@ -72,8 +72,8 @@ services:
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_NO_DAEMONIZE=true
       - PYTHONPATH=$PYTHONPATH:/opt/spark/work-dir
-      - PYSPARK_PYTHON=/usr/bin/python3.11
-      - PYSPARK_DRIVER_PYTHON=/usr/bin/python3.11
+      - PYSPARK_PYTHON=/usr/bin/python3
+      - PYSPARK_DRIVER_PYTHON=/usr/bin/python3
     ports:
       - "8080:8080"
       - "7077:7077"
@@ -91,9 +91,34 @@ services:
       - SPARK_WORKER_MEMORY=2G
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_NO_DAEMONIZE=true
-      - PYSPARK_PYTHON=/usr/bin/python3.11
+      - PYSPARK_PYTHON=/usr/bin/python3
     depends_on:
       - spark-master
     volumes:
       - .:/opt/spark/work-dir
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+
+  postgres_fraud:
+    image: postgres:18
+    container_name: postgres_fraud
+    environment: 
+      - POSTGRES_USER=admin 
+      - POSTGRES_PASSWORD=puffpuff
+      - POSTGRES_DB=fraud_db 
+    ports:
+      - "5432:5432"
+    #networks:
+    # - fraud_network
+
+  pgadmin_fraud:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_fraud 
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@fraud.net 
+      - PGADMIN_DEFAULT_PASSWORD=123456
+    ports:
+      - "2251:80"
+    #networks:
+    #  - fraud_network
+    depends_on:
+      - postgres_fraud

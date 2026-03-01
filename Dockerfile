@@ -24,6 +24,8 @@ RUN pip install --no-cache-dir \
     numpy==1.26.4 \
     pandas \
     pyarrow \
-    pyspark==${SPARK_VERSION}
+    pyspark==${SPARK_VERSION} \
+    kafka-python==2.0.2 \
+    python-dotenv
 
 WORKDIR /opt/spark/work-dir
