@@ -26,12 +26,13 @@ for i, row in df.iterrows():
     if (i + 1) % TARGET_TPS == 0:
         elapsed= time.time() - start_time
         #if we sent 1000 rows faster than 1 second sleep the difference 
-        if elapsed < 5.0:
-            time.sleep(5.0 - elapsed)
+        if elapsed < 1.0:
+            time.sleep(1.0 - elapsed)
         
         #Reset timer for next batch 
         print(f"Sent {i+1}/{total_rows} transactions....")
         start_time = time.time()
 
 producer.flush()
+
 print("Ingestion_Complete!!")
