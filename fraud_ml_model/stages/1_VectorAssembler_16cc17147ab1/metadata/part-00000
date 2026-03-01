@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1771692142518,"sparkVersion":"3.5.0","uid":"VectorAssembler_16cc17147ab1","paramMap":{"outputCol":"features","inputCols":["amount","is_night_tx","velocity_5m","loc_change_speed","type_index","bi","hi","osi"]},"defaultParamMap":{"outputCol":"VectorAssembler_16cc17147ab1__output","handleInvalid":"error"}}

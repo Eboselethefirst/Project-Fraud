@@ -1,6 +1,6 @@
 version: "3.8"
 
-services: 
+services:
   kafka:
     image: confluentinc/cp-kafka:7.8.0
     container_name: kafka-kraft
@@ -21,12 +21,10 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     healthcheck:
-      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      test: [ "CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list" ]
       interval: 10s
       timeout: 5s
       retries: 6
-
-
 
   kafka-connect:
     image: confluentinc/cp-kafka-connect:7.8.0
@@ -56,9 +54,9 @@ services:
       CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
       CONNECT_REBALANCE_TIMEOUT_MS: 60000
-    command: 
+    command:
       - /bin/bash
-      - -c 
+      - -c
       - |
         # This installs the robust CSV connector on startup
         confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:2.0.65
@@ -66,13 +64,16 @@ services:
     volumes:
       - ./data:/data
 
-
   spark-master:
-    image: apache/spark:3.5.0
+    build: .
+    container_name: spark-master_fraud
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_NO_DAEMONIZE=true
+      - PYTHONPATH=$PYTHONPATH:/opt/spark/work-dir
+      - PYSPARK_PYTHON=/usr/bin/python3.11
+      - PYSPARK_DRIVER_PYTHON=/usr/bin/python3.11
     ports:
       - "8080:8080"
       - "7077:7077"
@@ -81,14 +82,16 @@ services:
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
 
   spark-worker:
-    image: apache/spark:3.5.0
+    build: . 
+    container_name: spark-worker_fraud
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=2G 
+      - SPARK_WORKER_MEMORY=2G
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_NO_DAEMONIZE=true
+      - PYSPARK_PYTHON=/usr/bin/python3.11
     depends_on:
       - spark-master
     volumes:
