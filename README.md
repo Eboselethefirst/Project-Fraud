@@ -26,24 +26,24 @@ The pipeline is built on a modern "Lambda-lite" architecture using a distributed
 
 1. Clone and Configure
 
-Bash
+-- Bash
 
 git clone https://github.com/Eboselethefirst/Project-Fraud.git
 
 cd Project-Fraud
 
 2. Set Environment Variables
- Create a .env file in the root:
+Create a .env file in the root:
 
- Plaintext
+Plaintext
 
- POSTGRES_USER=admin
+POSTGRES_USER=admin
 
- POSTGRES_PASSWORD=your_password
+POSTGRES_PASSWORD=your_password
 
- POSTGRES_DB=fraud_db
+POSTGRES_DB=fraud_db
 
- POSTGRES_URL=jdbc:postgresql://postgres_fraud:5432/fraud_db
+POSTGRES_URL=jdbc:postgresql://postgres_fraud:5432/fraud_db
 
 3. Launch Infrastructure
 
