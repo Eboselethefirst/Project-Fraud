@@ -64,7 +64,8 @@ In another terminal, submit the Spark job
 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,org.postgresql:postgresql:42.6.0 fresh_fraud.py
 
 # Data Schema
-Column	Type	Description
+Column	Type	Description  
+
 1.step	Int	  Unit of time (1 step = 1 hour)   
 2.bank_code	String	 Nigerian Bank (e.g., OPay, Moniepoint)
 3.is_night_tx	 Boolean	Binary flag for 12am-5am transactions
