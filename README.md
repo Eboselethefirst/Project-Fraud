@@ -7,16 +7,16 @@ The "So What?": In a market with high transaction volumes and evolving social en
 
 # System Architecture
 The pipeline is built on a modern "Lambda-lite" architecture using a distributed streaming stack:
-Ingestion (Kafka): A Python-based producer streams 1,000+ Transactions Per Second (TPS) from an 800k+ row dataset.
-Processing (Spark Structured Streaming): * Data Cleaning: Real-time schema validation and type-casting (Boolean to Integer).
-Inference: A pre-trained Random Forest Pipeline Model scores each transaction.
-Action Logic: Transactions are categorized as ALLOW, FLAG TO COMPLIANCE, or BLOCK AND ALARM based on probability thresholds.
-Storage (Dual-Sinks):
-PostgreSQL: Comprehensive transaction logs for long-term auditing and model retraining.
-CSV Alerts: High-risk transactions are offloaded to a dedicated directory for immediate manual review.
+#Ingestion (Kafka): A Python-based producer streams 1,000+ Transactions Per Second (TPS) from an 800k+ row dataset.
+#Processing (Spark Structured Streaming): Data Cleaning: Real-time schema validation and type-casting (Boolean to Integer).
+#Inference: A pre-trained Random Forest Pipeline Model scores each transaction.
+#Action Logic: Transactions are categorized as ALLOW, FLAG TO COMPLIANCE, or BLOCK AND ALARM based on probability thresholds.
+#Storage (Dual-Sinks):
+#PostgreSQL: Comprehensive transaction logs for long-term auditing and model retraining.
+#CSV Alerts: High-risk transactions are offloaded to a dedicated directory for immediate manual review.
 
 # Professional Features
-Zero-Trust Security: Credential management is handled via python-dotenv. No sensitive database passwords (puffpuff) are hardcoded or committed to version control.
+#Zero-Trust Security: Credential management is handled via python-dotenv. No sensitive database passwords are hardcoded or committed to version control.
 Memory Efficiency: Implements .persist() and .unpersist() patterns within micro-batches to prevent memory leaks and redundant computation when writing to multiple sinks.
 Financial Precision: Strictly maintains DoubleType precision for transaction amounts to ensure audit-grade accuracy (no rounding errors).
 Containerized Orchestration: The entire environment (Kafka, Zookeeper, Spark, Postgres) is managed via docker-compose for 1-click reproducibility.
