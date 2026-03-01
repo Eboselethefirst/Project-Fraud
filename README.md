@@ -95,6 +95,6 @@ SELECT
     action, 
     COUNT(*) as total_count, 
     SUM(amount) as total_naira_value
-FROM transactions_log
+FROM transaction_data
 GROUP BY action;
 
