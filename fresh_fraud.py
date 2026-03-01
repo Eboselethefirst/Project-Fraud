@@ -54,7 +54,7 @@ def write_to_sinks(batch_df, batch_id):
     if batch_df.count() == 0:
         print("WARNING: Received an empty batch. Check your Kafka Producer/Schema!")
         return
-    batch_df.cache()
+    batch_df.persist()
     
 
     batch_df.write \
@@ -75,3 +75,4 @@ def write_to_sinks(batch_df, batch_id):
 query = final_df.select("step","type","amount","sender_acc_no","bank_code","home_state","origin_state","is_night_tx","velocity_5m","loc_change_speed","isFraud","fraud_prob","action").writeStream.foreachBatch(write_to_sinks).start()
 
 query.awaitTermination()
+
