@@ -1,3 +1,6 @@
+./images/Project Pipeline drawio.png
+
+
 # Real-Time Fraud Detection Pipeline (Nigerian Fintech Scenario)
 
 # Overview
